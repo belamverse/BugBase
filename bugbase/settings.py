@@ -131,3 +131,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+GITHUB_CLIENT_ID = os.getenv('GITHUB_CLIENT_ID')
+GITHUB_CLIENT_SECRET = os.getenv('GITHUB_CLIENT_SECRET')
+GITHUB_REDIRECT_URI = os.getenv('GITHUB_REDIRECT_URI')
