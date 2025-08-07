@@ -1,0 +1,47 @@
+/myenv
+# Ignore the virtual environment directory
+*.pyc
+# Ignore Python bytecode files
+__pycache__/
+# Ignore Python cache directories
+*.pyo
+# Ignore optimized Python files
+*.pyd
+# Ignore Python dynamic modules
+*.pdb
+# Ignore Python debug files
+*.egg-info/
+# Ignore Python egg info directories
+*.eggs/
+# Ignore Python egg files
+*.whl
+# Ignore Python wheel files
+*.dist-info/
+# Ignore Python distribution info directories
+*.DS_Store
+# Ignore macOS Finder metadata files
+*.vscode/
+# Ignore Visual Studio Code settings
+*.idea/# Ignore JetBrains IDE settings
+*.log
+# Ignore log files
+.env
+# Ignore environment variables file
+
+*.db
+# Ignore database files
+*.sqlite3
+# Ignore SQLite database files
+*.csv
+# Ignore CSV files
+*.json
+# Ignore JSON files
+*.xml
+# Ignore XML files
+*.md
+# Ignore Markdown files
+/**/migrations/
+# Ignore Django migrations directory
+!/**/migrations/__init__.py
+# Ensure __init__.py in migrations is not ignored
+
