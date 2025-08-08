@@ -38,6 +38,6 @@ def create_or_update_user_from_github(data,access_token):
     user.username = data.get('login')
     user.first_name = data.get('name', '') or ''
     user.avatar_url = data.get('avatar_url', '') or ''
-    user.github_token = access_token
-    user.save(update_fields=['username', 'first_name', 'avatar_url','github_token'])
+    user.github_access_token = access_token
+    user.save(update_fields=['username', 'first_name', 'avatar_url', 'github_access_token'])
     return user
