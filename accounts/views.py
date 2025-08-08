@@ -2,6 +2,7 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework_simplejwt.tokens import RefreshToken
 from django.conf import settings
 from urllib.parse import urlencode
 from django.shortcuts import redirect
@@ -21,7 +22,7 @@ class GithubLogin(APIView):
         params = {
             'client_id': client_id,
             'redirect_uri': redirect_uri,
-            'scope': 'read:user user:email',
+            'scope': 'read:user user:email repo',
         }
         return redirect(f"{url}?{urlencode(params)}")
 
@@ -40,5 +41,17 @@ class GithubCallback(APIView):
         if not user_data:
             return Response({'error': 'Failed to retrieve user info'}, status=status.HTTP_400_BAD_REQUEST)
         
-        user = create_or_update_user_from_github(user_data)
+        user = create_or_update_user_from_github(user_data, access_token)
+
+        if user:
+            refresh = RefreshToken.for_user(user)
+            access = str(refresh.access_token)
+
+            query_params = urlencode({
+                'access': access,
+                'refresh': str(refresh)
+                })
+
+            return redirect(f"{settings.FRONTEND_SUCCESS_URL}?{query_params}")
+        return redirect(f"{settings.FRONTEND_ERROR_URL}")
 

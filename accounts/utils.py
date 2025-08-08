@@ -29,14 +29,15 @@ def get_github_user_info(access_token):
     return response.json()
 
 
-def create_or_update_user_from_github(data):
+def create_or_update_user_from_github(data,access_token):
     email = data.get('email') or f"{data.get('login')}@github.com"
     user, _ = User.objects.get_or_create(
         email=email,
         defaults={'is_active': True, 'is_staff': False}
     )
     user.username = data.get('login')
-    user.first_name = data.get('name', '')
-    user.avatar_url = data.get('avatar_url', '')
-    user.save(update_fields=['username', 'first_name', 'avatar_url'])
+    user.first_name = data.get('name', '') or ''
+    user.avatar_url = data.get('avatar_url', '') or ''
+    user.github_token = access_token
+    user.save(update_fields=['username', 'first_name', 'avatar_url','github_token'])
     return user

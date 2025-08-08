@@ -27,6 +27,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=150, blank=True, null=True)
     avatar_url = models.URLField(max_length=500, blank=True, null=True)
 
+    github_access_token = models.CharField(max_length=255, blank=True, null=True)
+
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
